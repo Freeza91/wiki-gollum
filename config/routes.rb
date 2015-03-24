@@ -10,9 +10,9 @@ Rails.application.routes.draw do
 
   resources :articles
   
-  root 'user#home'
-
-  get '/auth/google_oauth2/callback', to: 'user#callback'
+  root 'users#home'
+  
+  get '/auth/google_oauth2/callback', to: 'users#callback'
 
   mount Markitup::Rails::Engine, at: 'markitup', as: 'markitup'
 end
