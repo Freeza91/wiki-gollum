@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
 
-  mount Precious::App, at: 'wiki'
+  # mount Precious::App, at: 'wiki'
+
+  resources :wikis do
+    collection do
+      post 'preview'
+    end
+  end
 
   resources :articles
   

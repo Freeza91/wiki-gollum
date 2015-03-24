@@ -22,6 +22,8 @@ gem 'markitup-rails'
 # for wiki
 gem 'gollum'
 
+gem 'simple_form'
+
 gem 'cancancan'
 gem "omniauth-google-oauth2"
 

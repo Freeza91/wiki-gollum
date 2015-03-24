@@ -1,0 +1,21 @@
+<%= form_for @wiki do |f|%>
+  <div>
+    <%= f.label '你好'%>
+    <%= f.text_field 'name' %>
+  </div>
+
+  <div>
+    <%= f.label 'title' %>
+    <%= f.text_field 'title' %>
+  </div>
+
+  <div>
+    <%= f.label '内容' %>
+    <%= f.text_area 'raw_data' %>
+  </div>
+
+  <div>
+    <%= f.submit '创建' %>
+  </div>
+
+<% end %>
