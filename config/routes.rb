@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'user#home'
+  root 'users#home'
 
-  get '/auth/google_oauth2/callback', to: 'user#callback'
+  get '/auth/google_oauth2/callback', to: 'users#callback'
 end
