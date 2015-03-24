@@ -13,6 +13,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'settingslogic'
 
+# font icon
+gem 'font-awesome-sass'
+
+# markdown editor
+gem 'markitup-rails'
+
 # for wiki
 gem 'gollum'
 

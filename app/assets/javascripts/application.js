@@ -13,4 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require markitup
+//= require markitup/sets/xbbcode/set
 //= require_tree .
