@@ -10,8 +10,7 @@ class User < ActiveRecord::Base
 
     def authenize(auth)
       provider = auth['provider']
-      openid = auth['extra']['id_token'][0...64]
-
+      openid = auth['uid']
       locate_from_google(provider, openid) ||
         create_auth(provider, openid, auth)
     end
@@ -30,7 +29,8 @@ class User < ActiveRecord::Base
                       openid: openid,
                       name: name,
                       email: email,
-                      avator: avator)
+                      avator: avator,
+                      role: :common)
       user.save
     end
   end
