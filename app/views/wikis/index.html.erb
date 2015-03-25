@@ -1,5 +1,7 @@
+<ul>
 <% @wikis.each do |wiki| %>
-  <div>
-    <%= wiki.raw_data %>
-  </div>
+  <li>
+    <%= link_to "#{ wiki.name }", wiki_path(wiki.name) %>
+  </li>
 <% end %>
+</ul>

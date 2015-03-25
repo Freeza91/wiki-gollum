@@ -1,1 +1,14 @@
-<%= @wiki.raw_data %>
+<div id="test" v-html="wiki | marked"></div>
+<script>
+window.onload=function(){
+  new Vue({
+    el: '#test',
+    data: {
+      wiki: "<%= j @wiki.raw_data.to_s.html_safe %>"
+    },
+    filters:{
+      marked: marked
+    }
+  });
+}
+</script>
