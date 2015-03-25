@@ -14,6 +14,4 @@ Rails.application.routes.draw do
   delete 'logout', to: 'users#delete'
 
   get '/auth/google_oauth2/callback', to: 'users#callback'
-
-  mount Markitup::Rails::Engine, at: 'markitup', as: 'markitup'
 end
