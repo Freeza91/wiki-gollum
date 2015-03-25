@@ -6,13 +6,13 @@ class Ability
 
     alias_action :create, :read, :update, :to => :cru
 
-    case user.role.to_sym
-    when :super_admin
+    case user.try(:role)
+    when :super_admin.to_s
         can :manage, :all
-    when :admin
+    when :admin.to_s
         can :manage, Wiki
         can :cru, User
-    when :common
+    when :common.to_s
         can :manage, Wiki
     end
 
