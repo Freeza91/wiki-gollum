@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   enum provider: [:google_oauth2]
   enum role:     [:super_admin, :admin, :common]
 
+  has_many :stars, dependent: :destroy
+
   class << self
 
     def authenize(auth)

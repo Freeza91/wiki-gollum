@@ -4,6 +4,7 @@ class WikisController < ApplicationController
 
   def index
     @wikis = Wiki::DATA.pages
+    p request.referer
   end
 
   def new
