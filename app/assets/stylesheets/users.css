@@ -1,2 +1,13 @@
-/*@import "font-awesome-sprockets";*/
-@import "font-awesome";
+#login{
+
+}
+#login .fa{
+  background-color: #4d90fe;
+  color: #fff;
+  padding: 5px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 3px;
+  text-align: center;
+}
