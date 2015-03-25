@@ -1,5 +1,7 @@
 class WikisController < ApplicationController
 
+  load_and_authorize_resource
+
   def index
     @wikis = Wiki::DATA.pages
   end
