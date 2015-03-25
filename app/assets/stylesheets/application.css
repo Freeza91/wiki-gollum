@@ -12,6 +12,7 @@
  *
  *= require markitup/skins/markitup/style
  *= require markitup/sets/xbbcode/style
+ *= require font-awesome
  *= require_tree .
  *= require_self
  */
