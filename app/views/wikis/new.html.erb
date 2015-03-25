@@ -1,6 +1,31 @@
+<%= form_for @wiki, html: {method: 'post'} do |f|%>
+  <div>
+    <%= f.label 'wiki 文件名'%>
+    <%= f.text_field 'name', placeholder: 'year-month-day-keywords', value: "#{@wiki.name}" %>
+  </div>
+
+  <div>
+    <%= f.label 'wiki 关键字' %>
+    <%= f.text_field 'title', placeholder: 'keywords' %>
+  </div>
+
+  <div>
+    <%= f.label '内容' %>
+    <%= f.text_area 'raw_data', placeholder: '#hello wiki'  %>
+  </div>
+
+  <div>
+    <%= f.label '变更信息提示'%>
+    <%= text_field_tag :message, '', placeholder: "update #{@wiki.name} "%>
+  </div>
+
+  <div>
+    <%= f.submit '创建' %>
+  </div>
+
+<% end %>
+
 <!--
-  <%= render 'form' %>
--->
 <style>
   html, body, #editor {
     margin: 0;
@@ -54,3 +79,4 @@ window.onload=function(){
   })
 }
 </script>
+-->

@@ -7,7 +7,7 @@ class WikisController < ApplicationController
   end
 
   def new
-    @wiki = Wiki.new(name: 'Create A Wiki ')
+    @wiki = Wiki.new(name: '')
   end
 
   def show
@@ -17,8 +17,8 @@ class WikisController < ApplicationController
   def update
     @wiki = Wiki.find(params[:id])
     commit = {
-      name: @current_user,
-      message: 'commit agagin',
+      name: @current_user.name,
+      message: message,
       email: @current_user.email
     }
     if @wiki.update_attributes(params[:wiki], commit)
@@ -32,7 +32,7 @@ class WikisController < ApplicationController
     @wiki = Wiki.new(params[:wiki])
     commit = {
       name: @current_user,
-      message: 'commit agagin',
+      message: message,
       email: @current_user.email
     }
     begin
@@ -47,11 +47,15 @@ class WikisController < ApplicationController
     @wiki = Wiki.find(params[:id])
     commit = {
       name: @current_user,
-      message: 'commit agagin',
+      message: message,
       email: @current_user.email
     }
     @wiki.delete_page(@wiki.page, commit)
     redirect_to wikis_path
+  end
+
+  def message
+    params['message'].present? ? "update #{@wiki.name}" : "#{params['message']}"
   end
 
 end
