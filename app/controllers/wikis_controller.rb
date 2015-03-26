@@ -4,10 +4,11 @@ class WikisController < ApplicationController
 
   def index
     @wikis = Wiki::DATA.pages
+    p request.referer
   end
 
   def new
-    @wiki = Wiki.new(name: 'hello hdfshifsdhisdfhisdf')
+    @wiki = Wiki.new(name: '')
   end
 
   def show
@@ -17,9 +18,9 @@ class WikisController < ApplicationController
   def update
     @wiki = Wiki.find(params[:id])
     commit = {
-      name: 'rudy',
-      message: 'commit agagin ',
-      email: '347212291@qq.com'
+      name: @current_user.name,
+      message: message,
+      email: @current_user.email
     }
     if @wiki.update_attributes(params[:wiki], commit)
       redirect_to wiki_path(@wiki.name)
@@ -31,9 +32,9 @@ class WikisController < ApplicationController
   def create
     @wiki = Wiki.new(params[:wiki])
     commit = {
-      name: 'rudy',
-      message: 'commit agagin ',
-      email: '347212291@qq.com'
+      name: @current_user,
+      message: message,
+      email: @current_user.email
     }
     begin
       @wiki.save(commit)
@@ -46,21 +47,16 @@ class WikisController < ApplicationController
   def delete
     @wiki = Wiki.find(params[:id])
     commit = {
-      name: 'rudy',
-      message: 'commit agagin ',
-      email: '347212291@qq.com'
+      name: @current_user,
+      message: message,
+      email: @current_user.email
     }
     @wiki.delete_page(@wiki.page, commit)
     redirect_to wikis_path
   end
 
-  def preview
-    @body = params[:body]
-    @content = Wiki::DATA.preview_page("Preview", @body, :markdown).formatted_data
-
-    respond_to do |format|
-      format.json
-    end
+  def message
+    params['message'].present? ? "update #{@wiki.name}" : "#{params['message']}"
   end
 
 end

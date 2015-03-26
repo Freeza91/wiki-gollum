@@ -1,3 +1,5 @@
+require 'gollum/app'
+
 class Wiki
 
   include ActiveModel::AttributeMethods

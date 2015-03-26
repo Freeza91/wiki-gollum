@@ -1,5 +1,8 @@
+<ul>
 <% @wikis.each do |wiki| %>
-  <div>
-    <%= wiki.formatted_data %>
-  </div>
+  <li>
+    <%= link_to "#{ wiki.name }", wiki_path(wiki.name), 'data-no-turbolink' => false %>
+
+  </li>
 <% end %>
+</ul>
