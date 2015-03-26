@@ -1,5 +1,19 @@
 <%= link_to "编辑", edit_wiki_path(@wiki.name), 'data-no-turbolink' => false %>
+提交历史：
+<ul>
+  <div>
+    <% @wiki.versions.each do |v| %>
+      <li>提交时间： <%= v.authored_date %></li>
+      <li>提交人姓名：<%= v.author.name %></li>
+      <li>提交人邮箱：<%= v.author.email %></li>
+      <li>提交信息：<%= v.message %></li>
+    <% end %>
+  </div>
+</ul>
+
+具体内容：
 <article id="wiki" v-html="wiki | marked"></article>
+
 <script>
 window.onload=function(){
   new Vue({

@@ -1,0 +1,13 @@
+<% if current_user %>
+  <%= @current_user.name %>
+  <div>
+    <%= form_tag("/search", method: "get") do %>
+      <%= label_tag(:q, "寻找WIKI") %>
+      <%= text_field_tag(:q) %>
+      <%= submit_tag("Search") %>
+    <% end %>
+  </div>
+<% else %>
+  请登录
+<% end %>
+

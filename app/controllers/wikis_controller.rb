@@ -4,7 +4,6 @@ class WikisController < ApplicationController
 
   def index
     @wikis = Wiki::DATA.pages
-    p request.referer
   end
 
   def new
@@ -53,6 +52,10 @@ class WikisController < ApplicationController
     }
     @wiki.delete_page(@wiki.page, commit)
     redirect_to wikis_path
+  end
+
+  def search
+    Wiki.search(params[:q])
   end
 
   def message
