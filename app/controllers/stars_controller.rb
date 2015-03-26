@@ -1,5 +1,10 @@
 class StarsController < ApplicationController
 
+  def index
+    wiki_names = current_user.stars.map(&:wiki_name)
+    @wikis = Wiki.where(name: wiki_names)
+  end
+
   def star
     user = current_user
     star = Star.new(user_id: user.id, wiki_name: request.referer)
@@ -13,7 +18,7 @@ class StarsController < ApplicationController
     end
 
     respond_to do |format|
-      format.json { msg: msg, count: count }
+      format.json { render json: { msg: msg, count: count } }
     end
   end
 
@@ -35,7 +40,7 @@ class StarsController < ApplicationController
     end
 
     respond_to do |format|
-      format.json { count: count, msg: msg }
+      format.json { render json: { count: count, msg: msg } }
     end
   end
 

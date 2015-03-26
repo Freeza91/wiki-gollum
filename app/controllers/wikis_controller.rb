@@ -54,6 +54,10 @@ class WikisController < ApplicationController
     redirect_to wikis_path
   end
 
+  def search
+    Wiki.search(params[:q])
+  end
+
   def message
     params['message'].present? ? "update #{@wiki.name}" : "#{params['message']}"
   end

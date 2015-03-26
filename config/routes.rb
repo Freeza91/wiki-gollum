@@ -7,7 +7,12 @@ Rails.application.routes.draw do
   get '/auth/google_oauth2/callback', to: 'users#callback'
   delete 'logout', to: 'users#delete'
 
-  post 'star',    to: 'stars#star'
-  post 'unstar',  to: 'stars#instar'
+  resources :stars, only: :index do
+    collection do
+      post 'star',    to: 'stars#star'
+      post 'unstar',  to: 'stars#instar'
+    end
+  end
 
+  get '/search', to: 'wikis#search'
 end
