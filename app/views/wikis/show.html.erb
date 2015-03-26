@@ -1,3 +1,17 @@
+提交历史：
+<ul>
+  <div>
+    <% @wiki.versions.each do |v| %>
+      <li>提交时间： <%= v.authored_date %></li>
+      <li>提交人姓名：<%= v.author.name %></li>
+      <li>提交人邮箱：<%= v.author.email %></li>
+      <li>提交信息：<%= v.message %></li>
+    <% end %>
+  </div>
+</ul>
+
+具体内容：
+
 <div id="test" v-html="wiki | marked"></div>
 <script>
 window.onload=function(){
