@@ -12,11 +12,12 @@
 
 具体内容：
 
-<div id="test" v-html="wiki | marked"></div>
+<article id="wiki" v-html="wiki | marked"></article>
+
 <script>
 window.onload=function(){
   new Vue({
-    el: '#test',
+    el: '#wiki',
     data: {
       wiki: "<%= j @wiki.raw_data.to_s.html_safe %>"
     },

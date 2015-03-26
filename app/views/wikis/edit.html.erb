@@ -9,9 +9,10 @@
     <%= f.text_field 'title', placeholder: 'keywords' %>
   </div>
 
-  <div>
+  <div id="editor">
     <%= f.label '内容' %>
-    <%= f.text_area 'raw_data', placeholder: '#hello wiki'  %>
+    <%= f.text_area 'raw_data', 'v-model': 'wiki'  %>
+    <div v-html="wiki | marked"></div>
   </div>
 
   <div>
@@ -24,3 +25,19 @@
   </div>
 
 <% end %>
+
+
+<script>
+window.onload=function(){
+  new Vue({
+    el: '#editor',
+    data: {
+      <%#wiki: '# hello'%>
+      wiki: "<%= j @wiki.raw_data.to_s.html_safe %>"
+    },
+    filters: {
+      marked: marked
+    }
+  });
+};
+</script>
