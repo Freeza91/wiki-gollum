@@ -1,3 +1,4 @@
+<%= link_to "编辑", edit_wiki_path(@wiki.name), 'data-no-turbolink' => false %>
 <article id="wiki" v-html="wiki | marked"></article>
 <script>
 window.onload=function(){
