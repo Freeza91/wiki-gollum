@@ -22,15 +22,15 @@ body {
 body {
   background-color: #e8e8e8;
 }
-main {
-  max-width: 860px;
-  margin: 0 auto;
-}
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
 }
 
+#wrapper {
+  position: relative;
+  min-height: 100%;
+}
 #top-header {
   background-color: #3170c5;
   height: 40px;
@@ -42,7 +42,11 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: capitalize;
   padding: .2em 0;
 }
-
+main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding-bottom: 44px;
+}
 footer{
   position: absolute;
   bottom: 0;

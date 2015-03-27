@@ -1,20 +1,29 @@
 <main role="main">
 <%= link_to "编辑", edit_wiki_path(@wiki.name), 'data-no-turbolink' => false %>
-提交历史：
-<ul>
+<section class="content" id="wiki">
   <div>
-    <% @wiki.versions.each do |v| %>
-      <li>提交时间： <%= v.authored_date %></li>
-      <li>提交人姓名：<%= v.author.name %></li>
-      <li>提交人邮箱：<%= v.author.email %></li>
-      <li>提交信息：<%= v.message %></li>
-    <% end %>
+    <ul class="tab-controlls">
+      <li>
+        <a v-on="click: tabControll" data-trigger-type="article">article</a>
+      </li>
+      <li>
+        <a v-on="click: tabControll" data-trigger-type="commits">commits</a>
+      </li>
+    </ul>
   </div>
-</ul>
-
-具体内容：
-<section class="content">
-  <article id="wiki" class="markdown-body" v-html="wiki | marked"></article>
+  <div class="tabs">
+    <article id="article" class="markdown-body tab-item active" v-html="wiki | marked"></article>
+    <div id="commits" class="tab-item">
+      <ul>
+          <% @wiki.versions.each do |v| %>
+            <li>提交时间： <%= v.authored_date %></li>
+            <li>提交人姓名：<%= v.author.name %></li>
+            <li>提交人邮箱：<%= v.author.email %></li>
+            <li>提交信息：<%= v.message %></li>
+          <% end %>
+      </ul>
+    </div>
+  </div>
 </section>
 </main>
 <script>
@@ -24,8 +33,15 @@ window.onload=function(){
     data: {
       wiki: "<%= j @wiki.raw_data.to_s.html_safe %>"
     },
-    filters:{
+    filters: {
       marked: marked
+    },
+    methods: {
+      tabControll: function(e) {
+        var triggerType = $(e.target).data("triggerType"); 
+        $(".tabs .tab-item.active", "#wiki").removeClass("active");
+        $('#' + triggerType, "#wiki").addClass("active");
+      }
     }
   });
 }

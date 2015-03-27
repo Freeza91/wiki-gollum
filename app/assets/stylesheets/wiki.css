@@ -72,3 +72,20 @@ nav.wiki-nav {
 ----------*/
  #wiki {
  }
+
+
+ .tab-controlls {
+
+ }
+ .tab-controlls li {
+   cursor: pointer;
+ }
+ .tabs {
+
+ }
+ .tabs .tab-item{
+   display: none;
+ }
+ .tabs .tab-item.active {
+   display: block;
+ }
