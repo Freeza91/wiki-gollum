@@ -21,7 +21,9 @@ class WikisController < ApplicationController
       message: message,
       email: @current_user.email
     }
-    if @wiki.update_attributes(params[:wiki], commit)
+    if @wiki.update_attributes(@wiki, params[:wiki], commit)
+      @wiki.name = params[:wiki][:name]
+      @wiki.title = params[:wiki][:title]
       redirect_to wiki_path(@wiki.name)
     else
       render :edit
@@ -50,7 +52,8 @@ class WikisController < ApplicationController
       message: message,
       email: @current_user.email
     }
-    @wiki.delete_page(@wiki.page, commit)
+    page = Wiki::DATA.page(@wiki.name)
+    @wiki.delete_page(page, commit)
     redirect_to wikis_path
   end
 
