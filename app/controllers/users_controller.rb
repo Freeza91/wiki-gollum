@@ -5,6 +5,10 @@ class UsersController < ApplicationController
   load_and_authorize_resource only: :delete
 
   def home
+    if current_user
+      flash[:notice] = '已经登录'
+      redirect_to wikis_path
+    end
   end
 
   def callback
