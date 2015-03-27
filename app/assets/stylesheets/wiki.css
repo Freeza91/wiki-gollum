@@ -1,6 +1,3 @@
-body {
-  background-color: #fff;
-}
 #editor { 
   margin: 0;
 /*  height: 100%;*/
@@ -59,3 +56,19 @@ nav.wiki-nav {
   margin: 0;
   padding: .2em 0;  
 }
+
+/****************
+      Content
+****************/
+
+.content {
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 0 6px #b2a8a8;
+}
+/*----------
+    Article
+----------*/
+ #wiki {
+ }

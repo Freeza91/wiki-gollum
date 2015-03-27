@@ -4,6 +4,7 @@
  * file per style scope.
  *
  *= require font-awesome
+ *= require github-css-rails
  *= require_tree .
  *= require_self
  */
@@ -18,13 +19,23 @@ body {
   font-size: 14px;
   color: #333;
 }
+body {
+  background-color: #e8e8e8;
+}
+main {
+  max-width: 860px;
+  margin: 0 auto;
+}
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
 }
 
 #top-header {
-  background-color: black;
+  background-color: #3170c5;
+  height: 40px;
+  margin-bottom: 20px;
+  padding: 5px 0;
 }
 #top-header .title {
   color: white;
@@ -33,12 +44,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 footer{
-  background-color: #3170c5;
   position: absolute;
   bottom: 0;
-  width: 100%;
+  left: 10%;
+  box-sizing: border-box;
+  width: 80%;
   height: 44px;
+  border-top: 1px solid #dadada;
 }
+/*------------
+    Logo
+-------------*/
 .geekpark-logo {
   position: absolute;
   left: 50%;

@@ -1,3 +1,4 @@
+<main role="main">
 <%= link_to "编辑", edit_wiki_path(@wiki.name), 'data-no-turbolink' => false %>
 提交历史：
 <ul>
@@ -12,8 +13,10 @@
 </ul>
 
 具体内容：
-<article id="wiki" v-html="wiki | marked"></article>
-
+<section class="content">
+  <article id="wiki" class="markdown-body" v-html="wiki | marked"></article>
+</section>
+</main>
 <script>
 window.onload=function(){
   new Vue({
