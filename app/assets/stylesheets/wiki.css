@@ -77,17 +77,36 @@ nav.wiki-nav {
 
 
  .tab-controlls {
-
+  list-style: none;
+ }
+ .tab-controlls.right {
+   float: right;
  }
  .tab-controlls li {
    cursor: pointer;
+   float: left;
+   padding: 5px;
+   margin-right: 10px;
+   background-color: #3170c5;
  }
- .tabs {
+.tab-controlls li.active {
+  background-color: #fff;  
+}
+.tab-controlls li a {
+  color: #fff;
+  background-color: inherit;
+}
+.tab-controlls li.active a {
+  color: #4183c4;
+}
 
- }
- .tabs .tab-item{
-   display: none;
- }
- .tabs .tab-item.active {
-   display: block;
- }
+.tabs {
+  background-color: #fff;
+  padding:10px;
+}
+.tabs .tab-item{
+  display: none;
+}
+.tabs .tab-item.active {
+  display: block;
+}

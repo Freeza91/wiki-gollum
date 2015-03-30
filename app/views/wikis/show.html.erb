@@ -1,13 +1,15 @@
+<style>
+  .content { 
+    background-color: #ccc;
+  }
+</style>
 <main role="main">
 <%= link_to "编辑", edit_wiki_path(@wiki.name), 'data-no-turbolink' => false %>
 <section class="content" id="wiki">
-  <div>
-    <ul class="tab-controlls">
-      <li>
-        <a v-on="click: tabControll" data-trigger-type="article">article</a>
-      </li>
-      <li>
-        <a v-on="click: tabControll" data-trigger-type="commits">commits</a>
+  <div class="clear-fix">
+    <ul class="tab-controlls right clear-fix">
+      <li v-repeat="tabControlls" v-on="click: tabControll(this)" class="{{triggerType === $value ? 'active' : ''}}">
+        <a v-text="$value"></a> 
       </li>
     </ul>
   </div>
@@ -31,14 +33,18 @@ window.onload=function(){
   new Vue({
     el: '#wiki',
     data: {
-      wiki: "<%= j @wiki.raw_data.to_s.html_safe %>"
+      wiki: "<%= j @wiki.raw_data.to_s.html_safe %>",
+      triggerType: 'article',
+      tabControlls: ['article', 'commits']
+
     },
     filters: {
       marked: marked
     },
     methods: {
-      tabControll: function(e) {
-        var triggerType = $(e.target).data("triggerType"); 
+      tabControll: function(item) {
+        var triggerType = item._raw;
+        item.$root._data.triggerType = item._raw;
         $(".tabs .tab-item.active", "#wiki").removeClass("active");
         $('#' + triggerType, "#wiki").addClass("active");
       }
