@@ -27,6 +27,8 @@ gem 'github-css-rails'
 # for wiki
 gem 'gollum'
 
+gem 'qiniu'
+
 gem 'simple_form'
 
 gem 'cancancan'

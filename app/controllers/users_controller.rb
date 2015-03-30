@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'qiniu'
 
 class UsersController < ApplicationController
 
@@ -28,6 +29,22 @@ class UsersController < ApplicationController
     reset_session
     flash['notice'] = '成功登出'
     redirect_to root_path
+  end
+
+  def upload
+    put_policy = Qiniu::Auth::PutPolicy.new(bucket: 'geekpark-wiki',
+                                            key: key)
+    uptoken = Qiniu::Auth.generate_uptoken(put_policy)
+
+    render json: { upload_token: uptoken }
+  end
+
+  private
+
+  def key
+    require 'SecureRandom'
+    hex = SecureRandom.hex[0..8]
+    Time.now.to_i.to_s + hex + '.jpg'
   end
 
 end

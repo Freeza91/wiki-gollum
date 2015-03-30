@@ -15,4 +15,7 @@ Rails.application.routes.draw do
   end
 
   get '/search', to: 'wikis#search'
+
+  get '/upload_token', to: 'users#upload'
+
 end
