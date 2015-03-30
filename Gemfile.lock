@@ -132,6 +132,7 @@ GEM
       omniauth (~> 1.2)
     posix-spawn (0.3.10)
     rack (1.6.0)
+    rack-cors (0.3.1)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
@@ -227,6 +228,7 @@ DEPENDENCIES
   marked-rails
   mysql2
   omniauth-google-oauth2
+  rack-cors
   rails (= 4.2.1)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

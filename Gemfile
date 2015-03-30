@@ -31,6 +31,7 @@ gem 'simple_form'
 
 gem 'cancancan'
 gem "omniauth-google-oauth2"
+gem 'rack-cors'
 
 group :development, :test do
   gem 'byebug'
