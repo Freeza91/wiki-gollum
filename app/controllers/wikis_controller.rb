@@ -22,8 +22,6 @@ class WikisController < ApplicationController
       email: @current_user.email
     }
     if @wiki.update_attributes(@wiki, params[:wiki], commit)
-      @wiki.name = params[:wiki][:name]
-      @wiki.title = params[:wiki][:title]
       redirect_to wiki_path(@wiki.name)
     else
       render :edit
