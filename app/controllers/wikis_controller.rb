@@ -48,7 +48,7 @@ class WikisController < ApplicationController
     @wiki = Wiki.find(params[:id])
     commit = {
       name: @current_user,
-      message: message,
+      message: "delete #{@wiki.name} wiki by #{@current_user.name}",
       email: @current_user.email
     }
     page = Wiki::DATA.page(@wiki.name)
