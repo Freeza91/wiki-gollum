@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :stars, only: :index do
     collection do
       post 'star',    to: 'stars#star'
-      post 'unstar',  to: 'stars#instar'
+      post 'unstar',  to: 'stars#unstar'
     end
   end
 

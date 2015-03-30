@@ -12,6 +12,7 @@ class WikisController < ApplicationController
 
   def show
     @wiki = Wiki.find(params[:id])
+    @is_star = current_user.stars.map(&:wiki_name).include? @wiki.name
   end
 
   def update

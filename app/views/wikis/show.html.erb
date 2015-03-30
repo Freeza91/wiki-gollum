@@ -1,5 +1,5 @@
 <style>
-  .content { 
+  .content {
     background-color: #ccc;
   }
 </style>
@@ -7,7 +7,11 @@
 <div>
   <ul>
     <li>
-      <a class="fa fa-star star"></a>  
+      <% if @is_star %>
+        <a class="fa fa-star star active"></a>
+      <% else %>
+        <a class="fa fa-star star"></a>
+      <% end %>
     </li>
     <li>
       <%= link_to "", edit_wiki_path(@wiki.name), 'data-no-turbolink' => false, 'class': 'fa fa-edit' %>
@@ -21,7 +25,7 @@
   <div class="clear-fix">
     <ul class="tab-controlls right clear-fix">
       <li v-repeat="tabControlls" v-on="click: tabControll(this)" class="{{triggerType === $value ? 'active' : ''}}">
-        <a v-text="$value"></a> 
+        <a v-text="$value"></a>
       </li>
     </ul>
   </div>
@@ -73,18 +77,19 @@ window.onload=function(){
       }
     });
   });
-  $(".star").click(function() { 
+  $(".star").click(function() {
     var isStared = $(this).hasClass("active");
     var that = this;
     if(isStared) {
       $.ajax({
         url: '/stars/unstar',
+        method: 'post',
         data: {
           name: '<%= @wiki.name %>'
         },
         success: function(response) {
-          if(response.data.msg === 'success') {
-            $(that).removeClass("active"); 
+          if(response.msg === 'success') {
+            $(that).removeClass("active");
           } else {
             alert('unstar failed');
           }
@@ -98,14 +103,14 @@ window.onload=function(){
           name: '<%= @wiki.name %>'
         },
         success: function(response) {
-          if(response.data.msg === 'success') {
+          if(response.msg === 'success') {
             $(that).addClass("active");
           } else {
             alert('star failed');
           }
-        }  
+        }
       });
-    }  
+    }
   });
 }
 </script>
