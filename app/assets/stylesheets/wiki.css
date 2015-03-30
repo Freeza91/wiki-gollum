@@ -110,3 +110,14 @@ nav.wiki-nav {
 .tabs .tab-item.active {
   display: block;
 }
+
+/*
+ * icon
+*/
+
+  .fa-star {
+    color: #fff;
+  }
+  .fa-star.active {
+    color: #3170c5;
+  }

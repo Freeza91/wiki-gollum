@@ -4,7 +4,19 @@
   }
 </style>
 <main role="main">
-<%= link_to "编辑", edit_wiki_path(@wiki.name), 'data-no-turbolink' => false %>
+<div>
+  <ul>
+    <li>
+      <a class="fa fa-star star"></a>  
+    </li>
+    <li>
+      <%= link_to "", edit_wiki_path(@wiki.name), 'data-no-turbolink' => false, 'class': 'fa fa-edit' %>
+    </li>
+    <li>
+      <a class="fa fa-trash delete"></a>
+    </li>
+  </ul>
+</div>
 <section class="content" id="wiki">
   <div class="clear-fix">
     <ul class="tab-controlls right clear-fix">
@@ -45,10 +57,55 @@ window.onload=function(){
       tabControll: function(item) {
         var triggerType = item._raw;
         item.$root._data.triggerType = item._raw;
-        $(".tabs .tab-item.active", "#wiki").removeClass("active");
-        $('#' + triggerType, "#wiki").addClass("active");
+        <%#$(".tabs .tab-item.active", "#wiki").removeClass("active");%>
+        <%#$('#' + triggerType, "#wiki").addClass("active");%>
+        $(".tabs .tab-item.active", "#wiki").slideUp().removeClass("active");
+        $('#' + triggerType, "#wiki").slideDown().addClass("active");
       }
     }
+  });
+  $(".delete").click(function() {
+    $.ajax({
+      url: '/wikis/' + '<%= @wiki.name %>',
+      method: 'delete',
+      success: function(response) {
+        console.log(response);
+      }
+    });
+  });
+  $(".star").click(function() { 
+    var isStared = $(this).hasClass("active");
+    var that = this;
+    if(isStared) {
+      $.ajax({
+        url: '/stars/unstar',
+        data: {
+          name: '<%= @wiki.name %>'
+        },
+        success: function(response) {
+          if(response.data.msg === 'success') {
+            $(that).removeClass("active"); 
+          } else {
+            alert('unstar failed');
+          }
+        }
+      });
+    } else {
+      $.ajax({
+        url: '/stars/star',
+        method: 'post',
+        data: {
+          name: '<%= @wiki.name %>'
+        },
+        success: function(response) {
+          if(response.data.msg === 'success') {
+            $(that).addClass("active");
+          } else {
+            alert('star failed');
+          }
+        }  
+      });
+    }  
   });
 }
 </script>
