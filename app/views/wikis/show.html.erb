@@ -17,7 +17,8 @@
       <%= link_to "", edit_wiki_path(@wiki.name), 'data-no-turbolink' => false, 'class': 'fa fa-edit' %>
     </li>
     <li>
-      <a class="fa fa-trash delete"></a>
+      <%= link_to '', wiki_path(@wiki.name), method: 'delete', data: { confirm: "你真要删除wiki: #{@wiki.name}吗？" },
+                                                               class: "fa fa-trash delete" %>
     </li>
   </ul>
 </div>
@@ -68,15 +69,7 @@ window.onload=function(){
       }
     }
   });
-  $(".delete").click(function() {
-    $.ajax({
-      url: '/wikis/' + '<%= @wiki.name %>',
-      method: 'delete',
-      success: function(response) {
-        console.log(response);
-      }
-    });
-  });
+
   $(".star").click(function() {
     var isStared = $(this).hasClass("active");
     var that = this;

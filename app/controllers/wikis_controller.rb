@@ -44,7 +44,7 @@ class WikisController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @wiki = Wiki.find(params[:id])
     commit = {
       name: @current_user,
@@ -52,7 +52,7 @@ class WikisController < ApplicationController
       email: @current_user.email
     }
     page = Wiki::DATA.page(@wiki.name)
-    @wiki.delete_page(page, commit)
+    Wiki::DATA.delete_page(page, commit)
     redirect_to wikis_path
   end
 
