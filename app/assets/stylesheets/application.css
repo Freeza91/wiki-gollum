@@ -26,6 +26,12 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
 }
+ul.left {
+  float: left;
+}
+ul.right {
+  float: right;
+}
 .clear-fix:after {
   content: '';
   width: 0;
