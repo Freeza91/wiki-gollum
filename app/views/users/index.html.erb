@@ -1,0 +1,5 @@
+<% @users.each do |user| %>
+  <%= user.name %>
+  <%= user.email %>
+  <%= select_tag 'role', options_for_select(select_options, selected: user.role) %>
+<% end %>

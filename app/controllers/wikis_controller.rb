@@ -61,7 +61,7 @@ class WikisController < ApplicationController
   end
 
   def message
-    params['message'].present? ? "update #{@wiki.name}" : "#{params['message']}"
+    params['message'].present? ? "#{params['message']}" : "update #{@wiki.name}"
   end
 
 end

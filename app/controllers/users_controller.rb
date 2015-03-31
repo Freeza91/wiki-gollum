@@ -3,13 +3,25 @@ require 'qiniu'
 
 class UsersController < ApplicationController
 
-  load_and_authorize_resource only: :delete
+  load_and_authorize_resource only: [:delete, :index, :update]
 
   def home
     if current_user
       flash[:notice] = '已经登录'
       redirect_to wikis_path
     end
+  end
+
+  def index
+    @users = User.all
+  end
+
+  def update
+    msg = 'error'
+    user = User.find(params[:id])
+    msg = 'success' if user && user.update_attribute(role: params[:role].to_sym)
+
+    render json: { msg: msg}
   end
 
   def callback
