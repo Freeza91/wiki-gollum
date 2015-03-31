@@ -38,14 +38,16 @@
     <div class="markdown-body" v-html="wiki | marked"></div>
     </article>
     <div id="commits" class="tab-item">
-      <ul>
-          <% @wiki.versions.each do |v| %>
-            <li>提交时间： <%= v.authored_date %></li>
-            <li>提交人姓名：<%= v.author.name %></li>
-            <li>提交人邮箱：<%= v.author.email %></li>
-            <li>提交信息：<%= v.message %></li>
-          <% end %>
-      </ul>
+      <% @wiki.versions.each do |v| %>
+        <div class="commit">
+          <p class="msg">
+            <%= v.message %>
+          </p>
+          <p class="info">
+            <%= v.author.name %> authored on <%= v.authored_date %> 
+          </p>
+        </div>
+      <% end %>
     </div>
   </div>
 </section>
@@ -78,37 +80,27 @@ window.onload=function(){
   $(".star").click(function() {
     var isStared = $(this).hasClass("active");
     var that = this;
+    var url;
     if(isStared) {
-      $.ajax({
-        url: '/stars/unstar',
-        method: 'post',
-        data: {
-          name: '<%= @wiki.name %>'
-        },
-        success: function(response) {
-          if(response.msg === 'success') {
-            $(that).removeClass("active");
-          } else {
-            alert('unstar failed');
-          }
-        }
-      });
+      url = '/stars/unstar';
     } else {
-      $.ajax({
-        url: '/stars/star',
-        method: 'post',
-        data: {
-          name: '<%= @wiki.name %>'
-        },
-        success: function(response) {
-          if(response.msg === 'success') {
-            $(that).addClass("active");
-          } else {
-            alert('star failed');
-          }
-        }
-      });
+      url = '/stars/star'
     }
+    $.ajax({
+      url: url,
+      method: 'post',
+      data: {
+        name: '<%= @wiki.name %>'
+      },
+      success: function(response) {
+        if(response.msg === 'success') {
+          isStared ? $(that).removeClass("active") : $(that).addClass("active");
+        } else {
+          var msg = isStared ? 'unstar failed' : 'star failed';
+          alert(msg);
+        }
+      }
+    });
   });
 }
 </script>

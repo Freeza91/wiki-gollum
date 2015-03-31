@@ -159,6 +159,23 @@ nav.wiki-nav {
   display: block;
 }
 
+#commits {
+  
+}
+#commits .commit {
+  border: 1px solid #e5e5e5;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.commit p {
+  margin: 0;
+}
+.commit .msg {
+  font-size: 1.2em; 
+}
+.commit .info {
+  color: #777;
+}
 /*
  * icon
 */
