@@ -57,7 +57,7 @@ class WikisController < ApplicationController
   end
 
   def search
-    Wiki.search(params[:q])
+    @wikis = Wiki.search(params[:q])
   end
 
   def message

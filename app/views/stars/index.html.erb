@@ -1,1 +1,4 @@
-show user's star wiki!
+ <% @wikis.each do |wiki| %>
+  <%= wiki.name %>
+  <%= link_to "#{wiki.name}", wiki_path(wiki.name), 'data-no-turbolink' => false  %>
+ <% end %>

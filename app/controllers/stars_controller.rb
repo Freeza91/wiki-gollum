@@ -2,7 +2,11 @@ class StarsController < ApplicationController
 
   def index
     wiki_names = current_user.stars.map(&:wiki_name)
-    @wikis = Wiki.where(name: wiki_names)
+    p wiki_names
+    @wikis = []
+    wiki_names.each do |wiki|
+      @wikis << Wiki.find(wiki)
+    end
   end
 
   def star
