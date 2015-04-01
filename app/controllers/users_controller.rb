@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   def update
     msg = 'error'
     user = User.find(params[:id])
-    msg = 'success' if user && user.update_attribute(role: params[:role].to_sym)
+    msg = 'success' if user && user.update_attributes(role: params[:role].to_sym)
 
     render json: { msg: msg}
   end
