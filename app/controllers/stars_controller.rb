@@ -2,7 +2,6 @@ class StarsController < ApplicationController
 
   def index
     wiki_names = current_user.stars.map(&:wiki_name)
-    p wiki_names
     @wikis = []
     wiki_names.each do |wiki|
       @wikis << Wiki.find(wiki)
@@ -11,8 +10,6 @@ class StarsController < ApplicationController
 
   def star
     user = current_user
-    p params
-    p user.id
     star = Star.new(user_id: user.id, wiki_name: params[:name])
     count = 0
     msg = 'success'
