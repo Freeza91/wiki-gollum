@@ -1,9 +1,12 @@
 <header id="top-header">
   <% if current_user %>
     <nav>
-      <ul>
+      <ul class="clear-fix">
         <li>
           <%= link_to 'wiki列表', wikis_path %>
+        </li>
+        <li>
+          <%= link_to '新建wiki', new_wiki_path %>
         </li>
       </ul>
     </nav>

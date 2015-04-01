@@ -139,7 +139,15 @@ footer{
 #top-header nav ul {
   list-style: none;
 }
+#top-header nav ul > li {
+  float: left;
+  margin-right: 10px;
+}
 #top-header nav ul > li > a {
   font-size: 1.1em;
   color: #ccc;
+  text-decoration: none;
+}
+#top-header nav ul > li > a:hover {  
+  color: #fff;
 }
