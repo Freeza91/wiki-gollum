@@ -44,7 +44,7 @@
             <%= v.message %>
           </p>
           <p class="info">
-            <%= v.author.name %> authored on <%= v.authored_date %> 
+            <%= v.author.name %> authored on <%= v.authored_date.strftime("%b,%a,%F %R") %>
           </p>
         </div>
       <% end %>
