@@ -32,3 +32,74 @@
 .login .fa:hover {
   opacity: .9;
 }
+
+/**************
+  用户管理列表
+**************/
+#user-list {
+  list-style: none;
+  font-size: 1.1em;
+  padding: 10px;
+}
+#user-list li {
+  margin-bottom: 10px;
+}
+#user-list button {
+  border: 1px solid #3170c5;
+  outline: none;
+  color: #fff;
+  background-color: #3170c5; 
+  padding: 3px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+#user-list button:hover {
+  color: #3170c5;
+  background-color: #fff;
+  border-color: #dadada;
+}
+
+/*************
+  搜素框&退出
+*************/
+#top-header #status {
+  float: right;
+  text-align: right;
+  list-style: none; 
+  height: 44px;
+  line-height: 44px;
+}
+#top-header #status > li {
+  float: left;
+  text-align: center;
+  padding: 0 8px;
+  margin-right: 7px;
+}
+#top-header #status a {
+  line-height: 44px;
+  font-size: 1.2em;
+  color: #fff;
+}
+#top-header #status .search {
+  position: relative;
+  margin-right: 15px;
+}
+#top-header #status .search input {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  padding: 0 4px;
+  font-size: 1.1em;
+  height: 25px;
+}
+#top-header #status .search-icon {
+  position: absolute;
+  top: 0;
+  right: 10px; 
+  cursor: pointer;
+  color: #7aa9d7;
+}
+#top-header #status .logout a:hover {
+  color: #ccc;
+}

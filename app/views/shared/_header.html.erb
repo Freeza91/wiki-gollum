@@ -1,13 +1,29 @@
-<% if current_user %>
-  <%= @current_user.name %>
-  <div>
-    <%= form_tag("/search", method: "get") do %>
-      <%= label_tag(:q, "寻找WIKI") %>
-      <%= text_field_tag(:q) %>
-      <%= submit_tag("Search") %>
-    <% end %>
-  </div>
-<% else %>
-  请登录
-<% end %>
+<header id="top-header">
+  <div class="geekpark-logo"></div>
+  <% if current_user %>
+    <ul id="status" class="clear-fix">
+      <li class="search">
+        <form action="/search" method="get">
+          <div class="search-box">
+            <input type="text" name="q" />
+          </div>
+          <a class="fa fa-search search-icon"></a>
+        </form>
+      </li>
+      <li class="user-name">
+        <%= link_to "#{ current_user.name }", 'javascript: void(0)' %>
+      </li>
+      <li class="logout">
+        <%= link_to "退出", logout_path, 'method': 'delete' %>
+      </li>
+    </ul>
+  <% end %>
+</header> 
 
+<script>
+$(document).ready(function() {
+  $('.search-icon').click(function() {
+    $('#status form').submit();
+  });
+});
+</script>
