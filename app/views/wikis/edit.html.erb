@@ -1,1 +1,1 @@
-<%= render 'form' %> 
+<%= render partial: 'form', locals: {method: 'put', quit_path: wiki_path(@wiki.name), action: wiki_path(@wiki.name) } %> 

@@ -1,4 +1,14 @@
- <% @wikis.each do |wiki| %>
-  <%= wiki.name %>
-  <%= link_to "#{wiki.name}", wiki_path(wiki.name), 'data-no-turbolink' => false  %>
- <% end %>
+<main role="main">
+  <section class="content">
+    <p>共搜索到<%= @wikis.size %>条结果</p>
+    <nav class="wiki-nav">
+      <ul>
+      <% @wikis.each do |wiki| %>
+        <li>
+          <%= link_to "#{ wiki.name }", wiki_path(wiki.name), 'data-no-turbolink' => false %>
+        </li>
+      <% end %>
+      </ul>
+    </nav>
+  </section>
+</main>

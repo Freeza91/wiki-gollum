@@ -1,4 +1,13 @@
 <header id="top-header">
+  <% if current_user %>
+    <nav>
+      <ul>
+        <li>
+          <%= link_to 'wiki列表', wikis_path %>
+        </li>
+      </ul>
+    </nav>
+  <% end %>
   <div class="geekpark-logo"></div>
   <% if current_user %>
     <ul id="status" class="clear-fix">

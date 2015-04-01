@@ -5,8 +5,7 @@
 </style>
 <main role="main">
   <section class="content">
-    <% if @wiki.name!="" %>
-      <%= form_for @wiki, html: {method: 'put'}, url: wiki_path(@wiki.name) do |f|%>
+      <%= form_for @wiki, html: {method: method}, url: action  do |f|%>
         <div class="form-group"> 
           <%= f.text_field 'name', placeholder: 'year-month-day-keywords', value: "#{@wiki.name}" %>
         </div>
@@ -25,30 +24,10 @@
           <div class="form-group fluid">
             <%= f.submit '保 存' %>
           </div>
-        </div>
-      <% end %>
-    <% else %> 
-      <%= form_for @wiki, html: {method: 'post'} do |f| %>
-        <div class="form-group"> 
-          <%= f.text_field 'name', placeholder: 'wiki name', value: "#{@wiki.name}" %>
-        </div>
-
-        <div id="editor" class="form-group clear-fix">
-          <%= f.text_area 'raw_data', 'v-model': 'wiki', 'v-on': 'scroll: scrollSync("#preview", $event)'  %>
-          <div id="preview" v-html="wiki | marked" v-on="scroll: scrollSync('#wiki_raw_data', $event)"></div>
-        </div>
-
-        <div class="clear-fix">
-
-          <div class="form-group fluid" style="width:80%">
-            <%= text_field_tag :message, "", placeholder: "create wiki name " %>
-          </div>
-
           <div class="form-group fluid">
-            <%= f.submit '保 存' %>
+            <%= link_to '放弃', quit_path,  'data-no-turbolink' => false, class: 'giveup' %> 
           </div>
         </div>
-      <% end %>
     <% end %>
   </section>
 </main>
@@ -57,7 +36,6 @@
     new Vue({
       el: '#editor',
       data: {
-        <%#wiki: '# hello'%>
         wiki: "<%= j @wiki.raw_data.to_s.html_safe %>" || '#title'
       },
       filters: {

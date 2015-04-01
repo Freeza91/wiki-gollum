@@ -7,7 +7,7 @@ class WikisController < ApplicationController
   end
 
   def new
-    @wiki = Wiki.new(name: '')
+    @wiki = Wiki.new(name: '' )
   end
 
   def show
