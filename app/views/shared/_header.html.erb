@@ -1,0 +1,41 @@
+<header id="top-header">
+  <% if current_user %>
+    <nav>
+      <ul class="clear-fix">
+        <li>
+          <%= link_to 'wiki列表', wikis_path %>
+        </li>
+        <li>
+          <%= link_to '新建wiki', new_wiki_path %>
+        </li>
+      </ul>
+    </nav>
+  <% end %>
+  <div class="geekpark-logo"></div>
+  <% if current_user %>
+    <ul id="status" class="clear-fix">
+      <li class="search">
+        <form action="/search" method="get">
+          <div class="search-box">
+            <input type="text" name="q" />
+          </div>
+          <a class="fa fa-search search-icon"></a>
+        </form>
+      </li>
+      <li class="user-name">
+        <%= link_to "#{ current_user.name }", 'javascript: void(0)' %>
+      </li>
+      <li class="logout">
+        <%= link_to "退出", logout_path, 'method': 'delete' %>
+      </li>
+    </ul>
+  <% end %>
+</header> 
+
+<script>
+$(document).ready(function() {
+  $('.search-icon').click(function() {
+    $('#status form').submit();
+  });
+});
+</script>

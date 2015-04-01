@@ -1,0 +1,37 @@
+<main role="main">
+  <section class="content">
+    <ul id="user-list">
+    <% @users.each do |user| %>
+      <li>
+        <span name="user" user="<%= user.id %>"><%= user.name %></span>
+        <span><%= user.email %></span>
+      <%= select_tag 'role', options_for_select(select_options, selected: user.role) %>
+        <button class="access-contr">更改权限</button>
+      </li>
+    <% end %>
+    </ul>
+  </section>
+</main>
+<script>
+$(document).ready(function() {
+  $('.access-contr').click(function() {
+    var el = $(this).parent();
+    var role = el.find("[name='role']").val(),
+        id = el.find("[name='user']").attr("user");
+    console.log(role, id);
+    $.ajax({
+      url: '/users/' + id,
+      method: 'put',
+      data: {
+        role: role
+      },
+      success: function(res) {
+        cosnole.log(res);
+      },
+      error: function(res) {
+        console.log(res);
+      }
+    });
+  });
+});
+</script>

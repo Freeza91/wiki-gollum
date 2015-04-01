@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.1'
 gem 'mysql2'
 
 gem 'sass-rails', '~> 5.0'
@@ -21,13 +21,19 @@ gem 'vuejs-rails'
 # marked
 gem 'marked-rails'
 
+# github markdown css
+gem 'github-css-rails'
+
 # for wiki
 gem 'gollum'
+
+gem 'qiniu'
 
 gem 'simple_form'
 
 gem 'cancancan'
 gem "omniauth-google-oauth2"
+gem 'rack-cors'
 
 group :development, :test do
   gem 'byebug'

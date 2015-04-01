@@ -1,14 +1,106 @@
-<article id="wiki" v-html="wiki | marked"></article>
+<style>
+  .content {
+    background-color: #ccc;
+  }
+</style>
+<main role="main">
+<section class="content" id="wiki">
+  <div class="clear-fix">
+    <ul class="toolbar clear-fix left">
+      <li>
+        <% if @is_star %>
+          <a class="fa fa-star star active"></a>
+        <% else %>
+          <a class="fa fa-star star"></a>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to "", edit_wiki_path(@wiki.name), 'data-no-turbolink' => false, 'class': 'fa fa-edit', 'title': '编辑' %>
+      </li>
+      <li>
+        <%= link_to '', wiki_path(@wiki.name), method: 'delete', data: { confirm: "你真要删除wiki: #{@wiki.name}吗？" },
+                                                                 class: "fa fa-trash delete",  'title': '删除' %>
+      </li>
+    </ul>
+    <ul class="tab-controlls right clear-fix">
+      <li v-repeat="tabControlls" v-on="click: tabControll(this)" class="{{triggerType === $value ? 'active' : ''}}">
+        <a v-text="$value"></a>
+      </li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <article id="article" class="tab-item active">
+    <header>
+      <h1>
+        <%= @wiki.name =%>
+      </h1>
+    </header>
+    <div class="markdown-body" v-html="wiki | marked"></div>
+    </article>
+    <div id="commits" class="tab-item">
+      <% @wiki.versions.each do |v| %>
+        <div class="commit">
+          <p class="msg">
+            <%= v.message %>
+          </p>
+          <p class="info">
+            <%= v.author.name %> authored on <%= v.authored_date.strftime("%b,%a,%F %R") %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+</main>
 <script>
 window.onload=function(){
   new Vue({
     el: '#wiki',
     data: {
-      wiki: "<%= j @wiki.raw_data.to_s.html_safe %>"
+      wiki: "<%= j @wiki.raw_data.to_s.html_safe %>",
+      triggerType: 'article',
+      tabControlls: ['article', 'commits']
+
     },
-    filters:{
+    filters: {
       marked: marked
+    },
+    methods: {
+      tabControll: function(item) {
+        var triggerType = item._raw;
+        item.$root._data.triggerType = item._raw;
+        <%#$(".tabs .tab-item.active", "#wiki").removeClass("active");%>
+        <%#$('#' + triggerType, "#wiki").addClass("active");%>
+        $(".tabs .tab-item.active", "#wiki").slideUp().removeClass("active");
+        $('#' + triggerType, "#wiki").slideDown().addClass("active");
+      }
     }
+  });
+
+  $(".star").click(function() {
+    var isStared = $(this).hasClass("active");
+    var that = this;
+    var url;
+    if(isStared) {
+      url = '/stars/unstar';
+    } else {
+      url = '/stars/star'
+    }
+    $.ajax({
+      url: url,
+      method: 'post',
+      data: {
+        name: '<%= @wiki.name %>'
+      },
+      success: function(response) {
+        if(response.msg === 'success') {
+          isStared ? $(that).removeClass("active") : $(that).addClass("active");
+        } else {
+          var msg = isStared ? 'unstar failed' : 'star failed';
+          alert(msg);
+        }
+      }
+    });
   });
 }
 </script>

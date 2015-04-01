@@ -13,7 +13,7 @@ class Ability
         can :manage, Wiki
         can :cru, User
     when :common.to_s
-        can :manage, Wiki
+        can :cru, Wiki
     end
 
   end

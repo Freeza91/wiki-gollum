@@ -4,6 +4,150 @@
  * file per style scope.
  *
  *= require font-awesome
+ *= require github-css-rails
  *= require_tree .
  *= require_self
  */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  min-height:100%;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+body {
+  background-color: #e8e8e8;
+}
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+ul.left {
+  float: left;
+}
+ul.right {
+  float: right;
+}
+.clear-fix:after {
+  content: '';
+  width: 0;
+  height: 0;
+  display: block;
+  clear: both;
+}
+#wrapper {
+  position: relative;
+  min-height: 100%;
+}
+#top-header {
+  background-color: #3170c5;
+  height: 40px;
+  margin-bottom: 20px;
+  padding: 5px 0;
+}
+#top-header .title {
+  color: white;
+  text-transform: capitalize;
+  padding: .2em 0;
+}
+main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding-bottom: 44px;
+}
+footer{
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  box-sizing: border-box;
+  width: 80%;
+  height: 44px;
+  border-top: 1px solid #dadada;
+}
+/*------------
+    Logo
+-------------*/
+.geekpark-logo {
+  position: absolute;
+  left: 50%;
+  margin-left: -67.5px;
+  width: 135px;
+  height: 44px;
+  background-image: url(http://7mnpep.com2.z0.glb.clouddn.com/assets/geekpark_new_logo1-aa5147d7ee4f629e10c533b965a68082.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/*************
+  搜素框&退出
+*************/
+#top-header #status {
+  float: right;
+  text-align: right;
+  list-style: none; 
+  height: 44px;
+  line-height: 44px;
+}
+#top-header #status > li {
+  float: left;
+  text-align: center;
+  padding: 0 8px;
+  margin-right: 7px;
+}
+#top-header #status a {
+  line-height: 44px;
+  font-size: 1.2em;
+  color: #fff;
+}
+#top-header #status .search {
+  position: relative;
+  margin-right: 15px;
+}
+#top-header #status .search input {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  padding: 0 4px;
+  font-size: 1.1em;
+  height: 25px;
+}
+#top-header #status .search-icon {
+  position: absolute;
+  top: 0;
+  right: 10px; 
+  cursor: pointer;
+  color: #7aa9d7;
+}
+#top-header #status .logout a:hover {
+  color: #ccc;
+}
+
+/***************
+  header nav
+***************/
+#top-header nav {
+  float: left;
+  height: 44px;
+  line-height: 44px;
+}
+#top-header nav ul {
+  list-style: none;
+}
+#top-header nav ul > li {
+  float: left;
+  margin-right: 10px;
+}
+#top-header nav ul > li > a {
+  font-size: 1.1em;
+  color: #ccc;
+  text-decoration: none;
+}
+#top-header nav ul > li > a:hover {  
+  color: #fff;
+}

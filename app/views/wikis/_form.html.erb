@@ -1,0 +1,58 @@
+<style>
+  main {
+    max-width: 1200px;
+  }
+</style>
+<main role="main">
+  <section class="content">
+      <%= form_for @wiki, html: {method: method}, url: action  do |f|%>
+        <div class="form-group"> 
+          <%= f.text_field 'name', placeholder: 'year-month-day-keywords', value: "#{@wiki.name}" %>
+        </div>
+
+        <div id="editor" class="form-group clear-fix">
+          <%= f.text_area 'raw_data', 'v-model': 'wiki', 'v-on': 'scroll: scrollSync("#preview", $event)'  %>
+          <div id="preview" v-html="wiki | marked" v-on="scroll: scrollSync('#wiki_raw_data', $event)"></div>
+        </div>
+
+        <div class="clear-fix">
+
+          <div class="form-group fluid" style="width:80%">
+            <%= text_field_tag :message, "", placeholder: "update #{@wiki.name} "%>
+          </div>
+
+          <div class="form-group fluid">
+            <%= f.submit '保 存' %>
+          </div>
+          <div class="form-group fluid">
+            <%= link_to '放弃', quit_path,  'data-no-turbolink' => false, class: 'giveup' %> 
+          </div>
+        </div>
+    <% end %>
+  </section>
+</main>
+<script>
+  window.onload=function(){
+    new Vue({
+      el: '#editor',
+      data: {
+        wiki: "<%= j @wiki.raw_data.to_s.html_safe %>" || '#title'
+      },
+      filters: {
+        marked: marked
+      },
+      methods: {
+        scrollSync: function(targetEle, e) {
+          var that = e.target;
+          var scrollTop = $(that).scrollTop();
+              <%#height = that.scrollHeight,%>
+              <%#targetHeight = $(targetEle)[0].scrollHeight;%>
+          <%#var scrollPersent = scrollTop / height;%>
+          <%#console.log(height, scrollTop, targetHeight);%>
+          <%#$(targetEle).scrollTop(targetHeight * scrollPersent);%>
+          $(targetEle).scrollTop(scrollTop);
+        }
+      }
+    });
+  };
+</script>

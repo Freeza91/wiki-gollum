@@ -4,15 +4,15 @@ class WikisController < ApplicationController
 
   def index
     @wikis = Wiki::DATA.pages
-    p request.referer
   end
 
   def new
-    @wiki = Wiki.new(name: '')
+    @wiki = Wiki.new(name: '' )
   end
 
   def show
     @wiki = Wiki.find(params[:id])
+    @is_star = current_user.stars.map(&:wiki_name).include? @wiki.name
   end
 
   def update
@@ -22,7 +22,7 @@ class WikisController < ApplicationController
       message: message,
       email: @current_user.email
     }
-    if @wiki.update_attributes(params[:wiki], commit)
+    if @wiki.update_attributes(@wiki, params[:wiki], commit)
       redirect_to wiki_path(@wiki.name)
     else
       render :edit
@@ -44,19 +44,24 @@ class WikisController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @wiki = Wiki.find(params[:id])
     commit = {
       name: @current_user,
-      message: message,
+      message: "delete #{@wiki.name} wiki by #{@current_user.name}",
       email: @current_user.email
     }
-    @wiki.delete_page(@wiki.page, commit)
+    page = Wiki::DATA.page(@wiki.name)
+    Wiki::DATA.delete_page(page, commit)
     redirect_to wikis_path
   end
 
+  def search
+    @wikis = Wiki.search(params[:q])
+  end
+
   def message
-    params['message'].present? ? "update #{@wiki.name}" : "#{params['message']}"
+    params['message'].present? ? "#{params['message']}" : "update #{@wiki.name}"
   end
 
 end

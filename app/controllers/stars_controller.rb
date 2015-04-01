@@ -1,20 +1,26 @@
 class StarsController < ApplicationController
 
+  def index
+    wiki_names = current_user.stars.map(&:wiki_name)
+    @wikis = []
+    wiki_names.each do |wiki|
+      @wikis << Wiki.find(wiki)
+    end
+  end
+
   def star
     user = current_user
-    star = Star.new(user_id: user.id, wiki_name: request.referer)
+    star = Star.new(user_id: user.id, wiki_name: params[:name])
     count = 0
     msg = 'success'
 
-    if user && valid?(request.referer) && star.save
-      count = Star.where(wiki_name: request.referer).size
+    if user && star.save
+      count = Star.where(wiki_name: params[:name]).size
     else
       msg = 'error'
     end
 
-    respond_to do |format|
-      format.json { msg: msg, count: count }
-    end
+    render json: { msg: msg, count: count }
   end
 
   def unstar
@@ -22,11 +28,11 @@ class StarsController < ApplicationController
     count = -1
     msg = 'success'
 
-    if user && valid?(request.referer)
-      star = Star.where(wiki_name: request.referer).first
+    if user
+      star = Star.where(wiki_name: params[:name]).first
       if star
         star.destroy
-        count = Star.where(wiki_name: request.referer).size
+        count = Star.where(wiki_name: params[:name]).size
       else
         msg = 'error'
       end
@@ -34,15 +40,7 @@ class StarsController < ApplicationController
       msg = 'error'
     end
 
-    respond_to do |format|
-      format.json { count: count, msg: msg }
-    end
-  end
-
-  private
-
-  def valid?(url)
-    url =~ /^https?:\/\/localhost:3000\/wikis\//
+    render json: { count: count, msg: msg }
   end
 
 end
