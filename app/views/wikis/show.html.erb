@@ -17,10 +17,12 @@
       <li>
         <%= link_to "", edit_wiki_path(@wiki.name), 'data-no-turbolink' => false, 'class': 'fa fa-edit', 'title': '编辑' %>
       </li>
-      <li>
-        <%= link_to '', wiki_path(@wiki.name), method: 'delete', data: { confirm: "你真要删除wiki: #{@wiki.name}吗？" },
-                                                                 class: "fa fa-trash delete",  'title': '删除' %>
-      </li>
+      <% if can? :delete, Wiki%>
+        <li>
+          <%= link_to '', wiki_path(@wiki.name), method: 'delete', data: { confirm: "你真要删除wiki: #{@wiki.name}吗？" },
+                                                                   class: "fa fa-trash delete",  'title': '删除' %>
+        </li>
+      <% end %>
     </ul>
     <ul class="tab-controlls right clear-fix">
       <li v-repeat="tabControlls" v-on="click: tabControll(this)" class="{{triggerType === $value ? 'active' : ''}}">
