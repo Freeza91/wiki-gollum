@@ -18,7 +18,6 @@ $(document).ready(function() {
     var el = $(this).parent();
     var role = el.find("[name='role']").val(),
         id = el.find("[name='user']").attr("user");
-    console.log(role, id);
     $.ajax({
       url: '/users/' + id,
       method: 'put',
@@ -26,7 +25,12 @@ $(document).ready(function() {
         role: role
       },
       success: function(res) {
-        cosnole.log(res);
+        console.log(res);
+        if(res.msg === 'success') {
+          alert('修改成功');
+        } else {
+          alert('修改失败');
+        }
       },
       error: function(res) {
         console.log(res);

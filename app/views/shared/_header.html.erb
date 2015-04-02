@@ -8,6 +8,11 @@
         <li>
           <%= link_to '新建wiki', new_wiki_path %>
         </li>
+        <% if current_user.role != 'common' %>
+        <li>
+          <%= link_to '用户管理', users_path %>
+        </li>
+        <% end %>
       </ul>
     </nav>
   <% end %>

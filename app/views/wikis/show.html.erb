@@ -94,7 +94,14 @@ window.onload=function(){
       },
       success: function(response) {
         if(response.msg === 'success') {
-          isStared ? $(that).removeClass("active") : $(that).addClass("active");
+          if(isStared) {
+            $(that).removeClass('active');
+            alert('unstar success');
+          } else {
+            $(that).addClass('active');
+            alert('star success');
+          }
+          <%#isStared ? $(that).removeClass("active") : $(that).addClass("active");%>
         } else {
           var msg = isStared ? 'unstar failed' : 'star failed';
           alert(msg);
