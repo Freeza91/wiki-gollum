@@ -14,6 +14,7 @@ class Ability
         can :cru, User
     when :common.to_s
         can :cru, Wiki
+        can :search, Wiki
     end
 
   end

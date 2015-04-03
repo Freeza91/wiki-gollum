@@ -3,7 +3,7 @@ require 'qiniu'
 
 class UsersController < ApplicationController
 
-  load_and_authorize_resource only: [:delete, :index, :update]
+  load_and_authorize_resource only: [:index, :update]
 
   def home
     if current_user
