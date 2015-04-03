@@ -6,7 +6,7 @@
           <%= link_to 'wiki列表', wikis_path %>
         </li>
         <li>
-          <%= link_to '新建wiki', new_wiki_path %>
+          <%= link_to '新建wiki', new_wiki_path, 'data-no-turbolink' => false %>
         </li>
         <% if current_user.role != 'common' %>
         <li>
